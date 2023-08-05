@@ -1,0 +1,43 @@
+# ************************************************************* #
+#  Michele Reynolds                                             #
+#  IT-140 - J6840  	                                            #
+#  7.9 LAB: Sorting TV Shows (dictionaries and lists)           #
+#  August 4,  2023                                              #
+#  Sort list numerically and alphabetically by key and value    #
+# ************************************************************* #
+# input file name
+filename = input()
+
+contents = ''
+
+# open file
+with open(filename, 'r') as file:
+    contents = file.readlines()
+
+# readlines into the dictionary
+show_dict = {}
+for counter in range(0, len(contents) - 1, 2):
+    # Strip leading zeros in keys and strip newlines
+    key = int(contents[counter].strip("\n").lstrip('0'))
+    value = contents[counter + 1].strip("\n")
+
+    # Append with a semicolon and other values if key already exists in the dictionary
+    if key in show_dict:
+        show_dict[key] += ';' + ' ' + value
+    else:
+        show_dict[key] = value
+
+# Sort show_dict by keys and by values respectively
+sorted_keys = sorted(show_dict)
+all_values = [value for sublist in show_dict.values() for value in sublist.split('; ')]
+sorted_values = sorted(all_values)
+
+# Write the sorted dictionary to the output file
+with open('output_keys.txt', 'w') as out1:
+    for key in sorted_keys:
+        out1.write('{}: {}\n'.format(key, show_dict[key]))
+
+# Write the sorted values to the output file
+with open('output_titles.txt', 'w') as out2:
+    for value in sorted_values:
+        out2.write('{}\n'.format(value))
