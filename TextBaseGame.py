@@ -173,7 +173,7 @@ while direction != 'quit':
         print(win_game)
         print(game_over)
         break
-    # If the player has less than six items in their inventory and enter the Conservator, they lose
+    # If the player has less than six items in their inventory and enter the Conservatory, they lose
     elif len(inventory) < 6 and current_room == killer_room:
         print(lose_game)
         print(game_over)
